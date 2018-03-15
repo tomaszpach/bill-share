@@ -22,6 +22,12 @@ const expenses = (state = initialState, action) => {
                     {id: id++, ...action.payload},
                 ],
             };
+
+        case 'DIVIDE':
+            return {
+                ...state,
+                divided: action.payload,
+            };
         default:
             return state
     }

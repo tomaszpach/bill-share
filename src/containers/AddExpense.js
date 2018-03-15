@@ -1,28 +1,56 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addExpense2 } from '../actions'
+import {addExpense2, divided} from '../actions'
 
 export class addExpense extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             expense: {
-                description: 'opis',
-                cost: 'koszt',
-                amount: 'ilosc'
+                item: 'Pizza',
+                cost: '30',
+                who: 'Person',
+                amount: '1'
             }
         };
     }
 
-    onClick(payload) {
-        this.props.addExpense2(payload);
-    }
+
 
     render() {
+        let item,
+            cost,
+            who;
+
         return (
             <div>
-                <button onClick={() => this.onClick(this.state.expense)}>addExpense2 test</button>
-                <button onClick={() => console.log(this.props.expenses)}>log</button>
+                <form
+                    onSubmit={e => {
+                        e.preventDefault();
+                        if (!item.value.trim()) {
+                            return
+                        }
+                        this.setState({
+                            expense: {
+                                item: item.value,
+                                cost: cost.value,
+                                who: who.value
+                            }
+                        }, () => {
+                            this.props.addExpense2(this.state.expense);
+                        });
+                        item.value = '';
+                        cost.value = '';
+                        who.value = ''
+                    }}
+                >
+                    <input placeholder='Item' ref={node => item = node} />
+                    <input placeholder='Cost' ref={node => cost = node} />
+                    <input placeholder='Who' ref={node => who = node} />
+                    <button type="submit">
+                        Add Expense
+                    </button>
+                </form>
             </div>
         )
     }
@@ -37,7 +65,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addExpense2: (params) => dispatch(addExpense2(params))
+        addExpense2: (params) => dispatch(addExpense2(params)),
+
     }
 }
 
