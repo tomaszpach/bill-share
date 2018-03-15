@@ -29,6 +29,11 @@ export const addExpense2 = payload => ({
     payload
 });
 
+export const summary = payload => ({
+    type: 'SUMMARY',
+    payload
+});
+
 export const divided = payload => ({
    type: 'DIVIDE',
    payload

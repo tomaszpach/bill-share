@@ -18,6 +18,8 @@ export class expensesList extends React.Component {
 
     render() {
 
+        // Todo dodaj jeszcze opcje ilosci ludzi w summary
+        console.log(this.props.expenses.summary);
         return (
             <div>
                 <ul>

@@ -1,5 +1,6 @@
 const initialState = {
-    expenseDetails: []
+    expenseDetails: [],
+    summary: 0
 };
 
 let id = 0;
@@ -21,6 +22,14 @@ const expenses = (state = initialState, action) => {
                     ...state.expenseDetails,
                     {id: id++, ...action.payload},
                 ],
+            };
+
+        case 'SUMMARY':
+            return {
+                ...state,
+                summary: [
+                    parseInt(state.summary) + parseInt(action.payload)
+                ]
             };
 
         case 'DIVIDE':

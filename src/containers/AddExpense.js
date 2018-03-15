@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {addExpense2, divided} from '../actions'
+import {addExpense2, divided, summary} from '../actions'
 
 export class addExpense extends React.Component {
     constructor(props) {
@@ -13,6 +13,10 @@ export class addExpense extends React.Component {
                 amount: '1'
             }
         };
+    }
+
+    componentDidUpdate() {
+        summary(this.state.expense.cost)
     }
 
 
@@ -38,6 +42,7 @@ export class addExpense extends React.Component {
                             }
                         }, () => {
                             this.props.addExpense2(this.state.expense);
+                            this.props.summary(this.state.expense.cost)
                         });
                         item.value = '';
                         cost.value = '';
@@ -66,7 +71,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         addExpense2: (params) => dispatch(addExpense2(params)),
-
+        summary: (params) => dispatch(summary(params))
     }
 }
 
