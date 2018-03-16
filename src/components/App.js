@@ -4,11 +4,13 @@ import React from 'react'
 // import VisibleTodoList from '../containers/VisibleTodoList'
 import AddExpense from '../containers/AddExpense'
 import ExpansesList from '../containers/ExpansesList'
+import Summary from '../containers/Summary'
 
 const App = () => (
     <div>
         <AddExpense />
         <ExpansesList />
+        <Summary/>
         {/*<AddTodo />*/}
         {/*<VisibleTodoList />*/}
         {/*<Footer />*/}

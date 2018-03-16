@@ -34,7 +34,7 @@ export const summary = payload => ({
     payload
 });
 
-export const divided = payload => ({
-   type: 'DIVIDE',
+export const recoverMoney = payload => ({
+   type: 'ZMIEN',
    payload
 });

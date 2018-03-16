@@ -1,77 +1,94 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {addExpense2, divided, summary} from '../actions'
+import {addExpense2, summary, recoverMoney} from '../actions'
 
 export class addExpense extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             expense: {
-                item: 'Pizza',
-                cost: '30',
-                who: 'Person',
-                amount: '1'
+                // item: 'Pizza',
+                // cost: '30',
+                // who: 'Person',
+                // amount: '1'
             }
         };
     }
 
-    componentDidUpdate() {
-        summary(this.state.expense.cost)
+    componentDidMount() {
+        this.textInput.focus()
     }
 
 
 
     render() {
-        let item,
-            cost,
+        let cost,
             who;
+
+        console.log('expensesDetails', this.props.expenses.expenseDetails);
 
         return (
             <div>
                 <form
                     onSubmit={e => {
                         e.preventDefault();
-                        if (!item.value.trim()) {
-                            return
-                        }
+                        // if (!item.value.trim()) {
+                        //     return
+                        // }
                         this.setState({
                             expense: {
-                                item: item.value,
+                                item: this.textInput.value || 'Wydatek',
                                 cost: cost.value,
-                                who: who.value
+                                who: who.value,
+                                payback: cost.value - parseInt(this.props.expenses.summary.divided)
                             }
                         }, () => {
                             this.props.addExpense2(this.state.expense);
-                            this.props.summary(this.state.expense.cost)
+                            this.props.summary(this.state.expense.cost);
+                            // this.props.expenses.expenseDetails.map(expense => {
+                            //     this.props.recoverMoney({
+                            //         who: expense.who,
+                            //         payback: expense.cost - this.props.expenses.summary.divided
+                            //     });
+                            //    // console.log('expense', expense.cost);
+                            // });
+                            // this.props.recoverMoney({
+                            //     who: 'mariusz',
+                            //     payback: 'hajsy'
+                            // });
                         });
-                        item.value = '';
+                        this.textInput.value = '';
                         cost.value = '';
-                        who.value = ''
+                        who.value = '';
+                        cost.focus();
                     }}
                 >
-                    <input placeholder='Item' ref={node => item = node} />
-                    <input placeholder='Cost' ref={node => cost = node} />
-                    <input placeholder='Who' ref={node => who = node} />
+                    <input placeholder='Wydatek' ref={(node) => { this.textInput = node; }} />
+                    <input placeholder='Koszt' ref={node => cost = node} />
+                    <input placeholder='Kto' ref={node => who = node} />
                     <button type="submit">
-                        Add Expense
+                        Dodaj wydatek
                     </button>
                 </form>
+                <button onClick={() => console.log(this.props.expenses)}>log</button>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    console.log(state);
+    console.log('state', state);
     return {
-        expenses: state.expenses || []
+        expenses: state.expenses || [],
+        summary: state.summary || {}
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         addExpense2: (params) => dispatch(addExpense2(params)),
-        summary: (params) => dispatch(summary(params))
+        summary: (params) => dispatch(summary(params)),
+        recoverMoney: (params) => dispatch(recoverMoney(params))
     }
 }
 

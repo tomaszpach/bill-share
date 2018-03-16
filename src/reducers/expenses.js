@@ -1,42 +1,63 @@
+import { payback } from "../actions";
+
 const initialState = {
     expenseDetails: [],
-    summary: 0
+    summary: {
+        amount: 0,
+        cost: 0,
+        divided: 0
+    },
+    differences: {
+        needMoney: false,
+        recoverMoney: 0
+    }
 };
 
 let id = 0;
 
 const expenses = (state = initialState, action) => {
-    // console.log(state);
+    console.log('state:', state);
+    console.log('action payload:', action.payload);
     switch (action.type) {
-        // case 'ADD_EXPENSE_COST':
-        //     return [
-        //         ...state,
-        //         {
-        //             cost: action.cost
-        //         }
-        //     ];
         case 'ADD_EXPENSE':
             return {
                 ...state,
                 expenseDetails: [
                     ...state.expenseDetails,
-                    {id: id++, ...action.payload},
+                    {
+                        id: id++,
+                        ...action.payload
+                    },
                 ],
             };
 
         case 'SUMMARY':
             return {
                 ...state,
-                summary: [
-                    parseInt(state.summary) + parseInt(action.payload)
-                ]
+                summary: {
+                    ...state.summary,
+                    cost: (parseFloat(state.summary.cost, 10) + parseFloat(action.payload, 10)).toFixed(2),
+                    amount: state.expenseDetails.length,
+                    divided: ((parseFloat(state.summary.cost, 10) + parseFloat(action.payload, 10)) / state.expenseDetails.length).toFixed(2)
+                }
             };
-
-        case 'DIVIDE':
+        case 'SET_RECOVER_FLAG':
             return {
                 ...state,
-                divided: action.payload,
             };
+
+        case 'ZMIEN':
+            const indexKogos = state.expenseDetails.findIndex(obiekt => obiekt.who === action.payload.who);
+            if (indexKogos !== -1) {
+                state.expenseDetails[indexKogos].payback = action.payload.payback;
+                return {...state}
+            }
+        // if(indexKogos !== -1){
+        //     return {
+        //         ...state,
+        //         expenseDetails: [...state.expenseDetails, state.expenseDetails[indexKogos].co = action.payload.co]
+        //     }
+        // }
         default:
             return state
     }
