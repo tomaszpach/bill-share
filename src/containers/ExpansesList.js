@@ -1,6 +1,8 @@
 import React from 'react'
-import {addExpense2} from "../actions";
 import {connect} from "react-redux";
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
 
 export class expensesList extends React.Component {
     constructor(props) {
@@ -10,40 +12,34 @@ export class expensesList extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-
-        // this.props.expenses.expenseDetails.map(expense => {
-        //     this.props.recoverMoney({
-        //         who: expense.who,
-        //         payback: expense.cost - this.props.expenses.summary.divided
-        //     });
-        // });
-    }
-
-
     listItem(expense) {
-        let diff = (expense.cost - this.props.expenses.summary.divided).toFixed(2),
-            abs = Math.abs(diff);
+        let who = expense.who,
+            payback = expense.payback,
+            abs = Math.abs(payback);
+
         return (
-            <li key={expense.id + 1}>
-                {expense.who} wydał: <b>{expense.cost} zł</b>
-                {diff < 0 ?
-                    ` i jest na minusie, musi oddać: ${abs} zł` : ` i jest na plusie, musi odzyskać: ${abs} zł`}
-                {/*{expense.id + 1}: {expense.item}, koszt: {expense.cost} ({(expense.cost - this.props.expenses.summary.divided).toFixed(2)}), kto: {expense.who}*/}
-            </li>
+            <ListItem key={expense.id}
+                      primaryText={`${who} wydał(a): ${expense.cost} i jest na ${payback < 0 ? 'minusie, musi oddac' : 'plusie, musi odzyskać' }: ${payback} zl`}
+                      leftIcon={<ActionGrade/>}/>
         )
     }
 
     render() {
         return (
-            <div>
-                <ul>
-                    {this.props.expenses.expenseDetails.map(expense =>
-                        this.listItem(expense)
-                    )}
-                </ul>
-            </div>
-
+            <List>
+                {this.props.expenses.expenseDetails.length ? (
+                    <div>
+                        <h2>Podsumowanie</h2>
+                        <p>Udział wzięło: <b>{this.props.expenses.summary.amount}</b> osoby</p>
+                        <p>Lącznie wydano: <b>{this.props.expenses.summary.cost}</b> zł</p>
+                        <p>Podzielony koszt: <b>{this.props.expenses.summary.divided}</b> zł</p>
+                        {/*<Subheader>1) Podzielone koszty to: </Subheader>*/}
+                        {this.props.expenses.expenseDetails.map(expense =>
+                            this.listItem(expense)
+                        )}
+                    </div>
+                ) : `Dodaj koszty/osoby by zobaczyć podsumowanie`}
+            </List>
         )
     }
 }
@@ -54,10 +50,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addExpense2: (params) => dispatch(addExpense2(params))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(expensesList);
+export default connect(mapStateToProps)(expensesList);

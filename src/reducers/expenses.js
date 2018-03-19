@@ -1,5 +1,3 @@
-import { payback } from "../actions";
-
 const initialState = {
     expenseDetails: [],
     summary: {
@@ -7,17 +5,13 @@ const initialState = {
         cost: 0,
         divided: 0
     },
-    differences: {
-        needMoney: false,
-        recoverMoney: 0
-    }
 };
 
 let id = 0;
 
 const expenses = (state = initialState, action) => {
     console.log('state:', state);
-    console.log('action payload:', action.payload);
+    // console.log('action payload:', action.payload);
     switch (action.type) {
         case 'ADD_EXPENSE':
             return {
@@ -46,18 +40,17 @@ const expenses = (state = initialState, action) => {
                 ...state,
             };
 
-        case 'ZMIEN':
-            const indexKogos = state.expenseDetails.findIndex(obiekt => obiekt.who === action.payload.who);
-            if (indexKogos !== -1) {
-                state.expenseDetails[indexKogos].payback = action.payload.payback;
-                return {...state}
-            }
-        // if(indexKogos !== -1){
-        //     return {
-        //         ...state,
-        //         expenseDetails: [...state.expenseDetails, state.expenseDetails[indexKogos].co = action.payload.co]
-        //     }
-        // }
+        case 'UPDATE_PAYBACK':
+            const divided = state.summary.divided;
+            return {
+                ...state,
+                expenseDetails: state.expenseDetails.map((expense, index) => {
+                    return {
+                        ...expense,
+                        payback: (expense.cost - divided).toFixed(2)
+                    }
+                })
+            };
         default:
             return state
     }

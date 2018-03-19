@@ -34,7 +34,7 @@ export const summary = payload => ({
     payload
 });
 
-export const recoverMoney = payload => ({
-   type: 'ZMIEN',
+export const updatePayback = payload => ({
+   type: 'UPDATE_PAYBACK',
    payload
 });

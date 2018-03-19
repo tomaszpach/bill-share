@@ -1,19 +1,21 @@
 import React from 'react'
-// import Footer from './Footer'
-// import AddTodo from '../containers/AddTodo'
-// import VisibleTodoList from '../containers/VisibleTodoList'
-import AddExpense from '../containers/AddExpense'
-import ExpansesList from '../containers/ExpansesList'
-import Summary from '../containers/Summary'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TopHeader from '../containers/TopHeader';
+import AddExpense from '../containers/AddExpense';
+import Summary from '../containers/Summary';
+
+const style = {
+    maxWidth: '1140px',
+    margin: '0 auto'
+};
 
 const App = () => (
-    <div>
-        <AddExpense />
-        <ExpansesList />
-        <Summary/>
-        {/*<AddTodo />*/}
-        {/*<VisibleTodoList />*/}
-        {/*<Footer />*/}
+    <div style={style}>
+        <MuiThemeProvider>
+            <TopHeader/>
+            <AddExpense/>
+            <Summary/>
+        </MuiThemeProvider>
     </div>
 );
 

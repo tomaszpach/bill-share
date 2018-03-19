@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
+import ExpensesList from './ExpansesList';
 
 export class summary extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export class summary extends React.Component {
             dividedCost ? (
                 <div>
                     <p>Podzielone koszty: <b>{dividedCost} zł</b></p>
-                    <p>Podzielony koszt to kwota jaką każdy powinien ponieść by wyjść na 0.</p>
+                    {/*<span>Podzielony koszt to kwota jaką każdy powinien ponieść by wyjść na 0.</span>*/}
                 </div>
             ) : ``
         )
@@ -34,9 +35,10 @@ export class summary extends React.Component {
 
         return (
             <div>
-                <h2>Podsumowanie</h2>
-                {this.summaryCost(summaryCost)}
-                {this.dividedCost(dividedCost)}
+                {/*<h2>Podsumowanie</h2>*/}
+                {/*{this.summaryCost(summaryCost)}*/}
+                {/*{this.dividedCost(dividedCost)}*/}
+                <ExpensesList />
             </div>
         )
     }
