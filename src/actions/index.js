@@ -29,12 +29,16 @@ export const addExpense2 = payload => ({
     payload
 });
 
-export const summary = payload => ({
-    type: 'SUMMARY',
-    payload
+export const summary = () => ({
+    type: 'SUMMARY'
 });
 
 export const updatePayback = payload => ({
    type: 'UPDATE_PAYBACK',
    payload
+});
+
+export const editExpense = payload => ({
+    type: 'EDIT_EXPENSE',
+    payload
 });

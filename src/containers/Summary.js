@@ -30,8 +30,8 @@ export class summary extends React.Component {
     }
 
     render() {
-        let summaryCost = this.props.expenses.summary.cost,
-            dividedCost = this.props.expenses.summary.divided;
+        // let summaryCost = this.props.expenses.summary.cost,
+        //     dividedCost = this.props.expenses.summary.divided;
 
         return (
             <div>

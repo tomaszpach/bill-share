@@ -11,7 +11,7 @@ let id = 0;
 
 const expenses = (state = initialState, action) => {
     console.log('state:', state);
-    // console.log('action payload:', action.payload);
+    console.log('action payload:', action.payload);
     switch (action.type) {
         case 'ADD_EXPENSE':
             return {
@@ -26,13 +26,17 @@ const expenses = (state = initialState, action) => {
             };
 
         case 'SUMMARY':
+            let summaryCost = 0;
+            state.expenseDetails.map(expense => {
+                summaryCost += parseFloat(expense.cost, 10)
+            });
             return {
                 ...state,
                 summary: {
                     ...state.summary,
-                    cost: (parseFloat(state.summary.cost, 10) + parseFloat(action.payload, 10)).toFixed(2),
+                    cost: summaryCost,
                     amount: state.expenseDetails.length,
-                    divided: ((parseFloat(state.summary.cost, 10) + parseFloat(action.payload, 10)) / state.expenseDetails.length).toFixed(2)
+                    divided: (summaryCost / state.expenseDetails.length).toFixed(2)
                 }
             };
         case 'SET_RECOVER_FLAG':
@@ -44,10 +48,23 @@ const expenses = (state = initialState, action) => {
             const divided = state.summary.divided;
             return {
                 ...state,
-                expenseDetails: state.expenseDetails.map((expense, index) => {
+                expenseDetails: state.expenseDetails.map(expense => {
                     return {
                         ...expense,
                         payback: (expense.cost - divided).toFixed(2)
+                    }
+                })
+            };
+        case 'EDIT_EXPENSE':
+            console.log('edit expense', action.payload);
+            return {
+                ...state,
+                expenseDetails: state.expenseDetails.map((expense) => {
+                    if (expense.id === action.payload.id) {
+                        // console.log('expense', expense);
+                        return action.payload
+                    } else {
+                        return expense
                     }
                 })
             };

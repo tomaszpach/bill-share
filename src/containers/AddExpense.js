@@ -31,7 +31,6 @@ export class addExpense extends React.Component {
                 whoValue: e.target.value
             });
         }
-
     }
 
     // componentDidMount() {
