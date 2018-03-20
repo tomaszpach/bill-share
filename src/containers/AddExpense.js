@@ -51,8 +51,7 @@ export class addExpense extends React.Component {
 
 
     render() {
-        let cost,
-            who;
+        let cost;
 
         return (
             <div>
@@ -72,8 +71,12 @@ export class addExpense extends React.Component {
                             this.updateExpense();
                         });
                         // this.costInput.value = '';
-                        this.state.costValue = '';
-                        this.state.whoValue = '';
+                        this.setState({
+                            costValue: '',
+                            whoValue: ''
+                        });
+                        // this.state.costValue = '';
+                        // this.state.whoValue = '';
                         // cost.value = '';
                         // who.value = '';
                         cost.focus();
@@ -93,7 +96,7 @@ export class addExpense extends React.Component {
                     />
 
                     <TextField
-                        ref={node => who = node}
+                        // ref={node => who = node}
                         autoFocus={false}
                         type="text"
                         value={this.state.whoValue}

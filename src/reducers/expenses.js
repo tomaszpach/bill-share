@@ -28,7 +28,7 @@ const expenses = (state = initialState, action) => {
         case 'SUMMARY':
             let summaryCost = 0;
             state.expenseDetails.map(expense => {
-                summaryCost += parseFloat(expense.cost, 10)
+                return summaryCost += parseFloat(expense.cost, 10)
             });
             return {
                 ...state,
@@ -39,10 +39,10 @@ const expenses = (state = initialState, action) => {
                     divided: (summaryCost / state.expenseDetails.length).toFixed(2)
                 }
             };
-        case 'SET_RECOVER_FLAG':
-            return {
-                ...state,
-            };
+        // case 'SET_RECOVER_FLAG':
+        //     return {
+        //         ...state,
+        //     };
 
         case 'UPDATE_PAYBACK':
             const divided = state.summary.divided;
@@ -61,7 +61,6 @@ const expenses = (state = initialState, action) => {
                 ...state,
                 expenseDetails: state.expenseDetails.map((expense) => {
                     if (expense.id === action.payload.id) {
-                        // console.log('expense', expense);
                         return action.payload
                     } else {
                         return expense

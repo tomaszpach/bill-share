@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+// import Subheader from 'material-ui/Subheader';
 import Satisfied from 'material-ui/svg-icons/social/sentiment-very-satisfied';
 import UnSatisfied from 'material-ui/svg-icons/social/sentiment-very-dissatisfied';
 import { editExpense, summary, updatePayback } from "../actions";
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 export class expensesList extends React.Component {
@@ -75,13 +75,15 @@ export class expensesList extends React.Component {
                     }
                 });
                 break;
+            default:
+                break;
         }
     }
 
     listItem(expense) {
         let who = expense.who.charAt(0).toUpperCase() + expense.who.slice(1),
-            payback = expense.payback,
-            abs = Math.abs(payback); // Change negative value
+            payback = expense.payback;
+            // abs = Math.abs(payback); // Change negative value
 
         return (
             <ListItem onClick={() => this.onClickEvent(expense)}
