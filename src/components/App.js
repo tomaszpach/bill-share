@@ -1,8 +1,8 @@
 import React from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopHeader from '../containers/TopHeader';
 import AddExpense from '../containers/AddExpense';
 import Summary from '../containers/Summary';
+import EditDialog from '../containers/EditDialog';
 
 const style = {
     maxWidth: '1140px',
@@ -11,11 +11,10 @@ const style = {
 
 const App = () => (
     <div style={style}>
-        <MuiThemeProvider>
-            <TopHeader/>
-            <AddExpense/>
-            <Summary/>
-        </MuiThemeProvider>
+        <TopHeader/>
+        <AddExpense/>
+        <Summary/>
+        <EditDialog/>
     </div>
 );
 
