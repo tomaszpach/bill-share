@@ -10,8 +10,6 @@ const initialState = {
 let id = 0;
 
 const expenses = (state = initialState, action) => {
-    console.log('state:', state);
-    console.log('action payload:', action.payload);
     switch (action.type) {
         case 'ADD_EXPENSE':
             return {
@@ -52,7 +50,6 @@ const expenses = (state = initialState, action) => {
                 })
             };
         case 'EDIT_EXPENSE':
-            console.log('edit expense', action.payload);
             return {
                 ...state,
                 expenseDetails: state.expenseDetails.map((expense) => {
