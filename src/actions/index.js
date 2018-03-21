@@ -15,3 +15,13 @@ export const editExpense = payload => ({
     type: 'EDIT_EXPENSE',
     payload
 });
+
+export const showDetails = payload => ({
+    type: 'SHOW_DETAILS',
+    payload
+});
+
+export const toggleDialog = payload => ({
+   type: 'TOGGLE_DIALOG',
+   payload
+});
