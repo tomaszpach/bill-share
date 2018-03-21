@@ -5,6 +5,15 @@ const initialState = {
         cost: 0,
         divided: 0
     },
+    selected: [
+        {
+            id: 0,
+            cost: 0,
+            who: '',
+            payback: 0
+        }
+    ],
+    isEditDialogOpen: false
 };
 
 let id = 0;
@@ -59,6 +68,22 @@ const expenses = (state = initialState, action) => {
                         return expense
                     }
                 })
+            };
+        case 'SHOW_DETAILS':
+            return {
+                ...state,
+                selected: state.expenseDetails.filter(expense => {
+                    if (expense.id === action.payload.id) {
+                        return expense
+                    } else {
+                        return null
+                    }
+                })
+            };
+        case 'TOGGLE_DIALOG':
+            return {
+                ...state,
+                isEditDialogOpen: action.payload
             };
         default:
             return state
