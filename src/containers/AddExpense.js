@@ -48,7 +48,7 @@ export class addExpense extends React.Component {
                         this.setState({
                             expense: {
                                 cost: this.state.costValue || 0,
-                                who: this.state.whoValue || `Użytkownik ${this.props.expenses.expenseDetails.length + 1}`,
+                                who: this.state.whoValue.charAt(0).toUpperCase() + this.state.whoValue.slice(1) || `Użytkownik ${this.props.expenses.expenseDetails.length + 1}`,
                             }
                         }, () => {
                             this.updateExpense();
