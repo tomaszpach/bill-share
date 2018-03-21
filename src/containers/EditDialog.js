@@ -47,7 +47,7 @@ export class editDialog extends React.Component {
                 this.setState({
                     expenseUpdate: {
                         ...this.state.expenseUpdate,
-                        who: e.target.value
+                        who: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
                     }
                 });
                 break;
