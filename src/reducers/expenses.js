@@ -19,6 +19,7 @@ const initialState = {
 let id = 0;
 
 const expenses = (state = initialState, action) => {
+    // console.log('state', state);
     switch (action.type) {
         case 'ADD_EXPENSE':
             return {
@@ -30,6 +31,17 @@ const expenses = (state = initialState, action) => {
                         ...action.payload
                     },
                 ],
+            };
+        case 'REMOVE_EXPENSE':
+            return {
+                ...state,
+                expenseDetails: state.expenseDetails.filter(expense => {
+                    if (expense.id !== action.payload.id) {
+                        return expense
+                    } else {
+                        return null
+                    }
+                })
             };
 
         case 'SUMMARY':

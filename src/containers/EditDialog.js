@@ -122,7 +122,7 @@ function mapDispatchToProps(dispatch) {
         editExpense: (params) => dispatch(editExpense(params)),
         toggleDialog: (params) => dispatch(toggleDialog(params)),
         summary: (params) => dispatch(summary(params)),
-        updatePayback: (params) => dispatch(updatePayback(params)),
+        updatePayback: (params) => dispatch(updatePayback(params))
     }
 }
 

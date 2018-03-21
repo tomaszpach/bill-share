@@ -3,6 +3,11 @@ export const addExpense2 = payload => ({
     payload
 });
 
+export const removeExpense = payload => ({
+    type: 'REMOVE_EXPENSE',
+    payload
+});
+
 export const summary = () => ({
     type: 'SUMMARY'
 });
