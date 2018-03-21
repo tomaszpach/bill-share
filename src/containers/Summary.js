@@ -2,58 +2,32 @@ import React from 'react'
 import { connect } from "react-redux";
 import ExpensesList from './ExpansesList';
 
-export class summary extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cost: 0
-        };
-    }
-
-    summaryCost(summaryCost) {
-        return (
-            summaryCost ? (
-                <p>Łącznie wydano: <b>{summaryCost} zł</b></p>
-            ) : `Dodaj koszty, aby zobaczyć podsumowanie.`
-        )
-    }
-
-    dividedCost(dividedCost) {
-        return (
-            dividedCost ? (
-                <div>
-                    <p>Podzielone koszty: <b>{dividedCost} zł</b></p>
-                    {/*<span>Podzielony koszt to kwota jaką każdy powinien ponieść by wyjść na 0.</span>*/}
-                </div>
-            ) : ``
-        )
-    }
-
+export class summaryContainer extends React.Component {
     render() {
-        // let summaryCost = this.props.expenses.summary.cost,
-        //     dividedCost = this.props.expenses.summary.divided;
-
+        let summary = this.props.summary;
+        if (summary > 0 ) {
+            console.log(summary);
+        }
         return (
-            <div>
-                {/*<h2>Podsumowanie</h2>*/}
-                {/*{this.summaryCost(summaryCost)}*/}
-                {/*{this.dividedCost(dividedCost)}*/}
-                <ExpensesList />
-            </div>
+            summary.count > 0 ? (
+                <div>
+                    <h2>Podsumowanie</h2>
+                    <p>Udział wzięło: <b>{summary.count}</b> osoby</p>
+                    <p>Lącznie wydano: <b>{summary.cost}</b> zł</p>
+                    <p>Podzielony koszt: <b>{summary.divided}</b> zł</p>
+                    <ExpensesList />
+                </div>
+            ) : (
+                <h2>Dodaj koszty by zobaczyć podsumowanie</h2>
+            )
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        expenses: state.expenses || []
+        summary: state.expenses.summary || []
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        // addExpense2: (params) => dispatch(addExpense2(params))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(summary);
+export default connect(mapStateToProps)(summaryContainer);
