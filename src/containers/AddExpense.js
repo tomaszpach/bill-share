@@ -37,11 +37,6 @@ export class addExpense extends React.Component {
         this.props.updatePayback();
     }
 
-    // componentDidUpdate() {
-    //     console.log(this.state.costValue);
-    // }
-
-
     render() {
         let cost;
 
