@@ -1,7 +1,7 @@
 const initialState = {
     expenseDetails: [],
     summary: {
-        amount: 0,
+        count: 0,
         cost: 0,
         divided: 0
     },
@@ -42,7 +42,7 @@ const expenses = (state = initialState, action) => {
                 summary: {
                     ...state.summary,
                     cost: summaryCost,
-                    amount: state.expenseDetails.length,
+                    count: state.expenseDetails.length,
                     divided: (summaryCost / state.expenseDetails.length).toFixed(2)
                 }
             };
