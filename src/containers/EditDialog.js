@@ -64,6 +64,9 @@ export class editDialog extends React.Component {
     }
 
     render() {
+        const textFieldStyle = {
+            maxWidth: '100%'
+        };
         const actions = [
             <FlatButton
                 label="Anuluj"
@@ -94,6 +97,7 @@ export class editDialog extends React.Component {
                         onChange={(event) => this.handleTextFieldChange(event, 'cost')}
                         hintText={'150'}
                         floatingLabelText={'Edytuj koszt'}
+                        style={textFieldStyle}
                     />
 
                     <TextField
@@ -103,6 +107,7 @@ export class editDialog extends React.Component {
                         onChange={(event) => this.handleTextFieldChange(event, 'who')}
                         hintText={'Tomek'}
                         floatingLabelText={'Edytuj imię'}
+                        style={textFieldStyle}
                     />
                 </div>
             </Dialog>
