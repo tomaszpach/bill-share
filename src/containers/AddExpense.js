@@ -41,9 +41,8 @@ export class addExpense extends React.Component {
         let cost;
 
         return (
-            <div>
-                <form
-                    onSubmit={e => {
+            <div className='add-expense'>
+                <form onSubmit={e => {
                         e.preventDefault();
                         this.setState({
                             expense: {

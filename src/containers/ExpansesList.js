@@ -62,7 +62,10 @@ export class expensesList extends React.Component {
 
         return (
             <div key={expense.id}>
-                <ListItem primaryText={`${who} wydał(a): ${expense.cost} zł i jest na ${payback < 0 ? 'minusie, musi oddać' : 'plusie, musi odzyskać' }: ${abs} zł`}
+                <ListItem primaryText={`${who} wydał(a): ${expense.cost} zł.`}
+                          secondaryText={
+                              <span style={{color: payback < 0 ? '#F44336' : '#85bb65' }}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać:' } <b>{abs}</b> zł</span>
+                          }
                           rightIcon={<NavigationExpandMoreIcon onClick={(event) => this.actionMenu(event, expense)} />}
                           leftIcon={payback > 0 ? (
                               <Satisfied/>
@@ -90,7 +93,7 @@ export class expensesList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='expanses-list'>
                 <List>
                     {this.props.expenses.expenseDetails.map(expense =>
                         this.listItem(expense)

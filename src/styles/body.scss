@@ -1,0 +1,52 @@
+html {
+    background-color: rgb(133, 187, 101);
+}
+
+body {
+    background-color: #fff;
+}
+
+
+.add-expense {
+    margin-bottom: 15px;
+    padding: 0 7px;
+
+    form {
+        > div {
+            width: 100% !important;
+        }
+    }
+}
+
+.expenses-list {
+    margin-bottom: 15px;
+    padding: 0 7px;
+
+    .summary {
+        //h3 {
+        //    text-align: center;
+        //}
+    }
+}
+
+.bottom-info {
+    padding: 0 7px;
+}
+
+@media only screen and (min-width: 580px) {
+    .add-expense {
+        > div {
+            width: calc(50% - 7px) !important;
+
+            &:nth-child(1) {
+                margin-right: 7px;
+            }
+            &:nth-child(2) {
+                margin-left: 7px;
+            }
+            &:nth-child(3) {
+                width: 100% !important;
+            }
+        }
+    }
+}

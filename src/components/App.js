@@ -3,6 +3,7 @@ import TopHeader from '../containers/TopHeader';
 import AddExpense from '../containers/AddExpense';
 import Summary from '../containers/Summary';
 import EditDialog from '../containers/EditDialog';
+import BottomInfo from '../containers/BottomInfo';
 
 const style = {
     maxWidth: '1140px',
@@ -15,6 +16,7 @@ const App = () => (
         <AddExpense/>
         <Summary/>
         <EditDialog/>
+        <BottomInfo/>
     </div>
 );
 
