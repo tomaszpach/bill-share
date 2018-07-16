@@ -65,7 +65,7 @@ export class editDialog extends React.Component {
 
     render() {
         const textFieldStyle = {
-            maxWidth: '100%'
+            width: '100%'
         };
         const actions = [
             <FlatButton
