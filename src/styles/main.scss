@@ -1,17 +1,3 @@
-html {
-    background-color: #85bb65;
-}
-
-body {
-    background-color: #fff;
-}
-
-header {
-    h1 {
-        color: #85bb65;
-    }
-
-    h3 {
-        display: inline-block;
-    }
-}
+@import "typography";
+@import "body";
+@import "header";

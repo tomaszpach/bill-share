@@ -3,6 +3,10 @@
 $mainFont: 'IBM Plex Serif', serif;
 $secondaryFont: 'Comfortaa', cursive;
 
+html {
+    background-color: #85bb65;
+}
+
 body, p, span {
     font-family: $secondaryFont;
     font-size: 16px;
@@ -11,6 +15,7 @@ body, p, span {
 }
 
 body {
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
     padding: 5px;
     min-height: calc(100vh - 26px);
