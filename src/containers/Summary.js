@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
-import ExpensesList from './ExpansesList';
+import ExpensesList from './ExpensesList';
 
 // Material UI Import
 // import IconButton from 'material-ui/IconButton';

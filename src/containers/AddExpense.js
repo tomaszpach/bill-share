@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addExpense2, summary, updatePayback} from '../actions'
+import {addExpense, summary, updatePayback} from '../actions'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export class addExpense extends React.Component {
+export class AddExpense extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +32,7 @@ export class addExpense extends React.Component {
     }
 
     updateExpense() {
-        this.props.addExpense2(this.state.expense);
+        this.props.addExpense(this.state.expense);
         this.props.summary(this.state.expense.cost);
         this.props.updatePayback();
     }
@@ -92,10 +92,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addExpense2: (params) => dispatch(addExpense2(params)),
+        addExpense: (params) => dispatch(addExpense(params)),
         summary: (params) => dispatch(summary(params)),
         updatePayback: (params) => dispatch(updatePayback(params))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(addExpense);
+export default connect(mapStateToProps, mapDispatchToProps)(AddExpense);

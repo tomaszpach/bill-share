@@ -1,15 +1,13 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {List, ListItem} from 'material-ui/List';
+import {List} from 'material-ui/List';
 import {showDetails, toggleDialog, removeExpense, updatePayback, summary} from "../actions";
 
 // Material UI imports
-import Satisfied from 'material-ui/svg-icons/social/sentiment-very-satisfied';
-import UnSatisfied from 'material-ui/svg-icons/social/sentiment-very-dissatisfied';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import Expense from '../components/Expense';
 
 export class expensesList extends React.Component {
     constructor(props) {
@@ -36,14 +34,11 @@ export class expensesList extends React.Component {
         this.props.updatePayback();
     }
 
-    actionMenu = (event, expense) => {
-        // This prevents ghost click.
-        event.preventDefault();
-
-        this.props.showDetails(expense);
+    actionMenu = (event, id) => {
+        this.props.showDetails(+id);
         this.setState({
             open: true,
-            anchorEl: event.currentTarget,
+            anchorEl: event,
         });
     };
 
@@ -53,36 +48,28 @@ export class expensesList extends React.Component {
         });
     };
 
+    componentDidMount() {
+        let expensesList = document.getElementsByClassName('expenses-list');
+        expensesList[0].onclick = (event) => {
+            let svg = event.target.closest('svg'),
+                id = svg ? svg.dataset.id : null;
 
-    listItem(expense) {
-        let who = expense.who,
-            payback = expense.payback,
-            abs = Math.abs(payback); // Change negative value
-
-        return (
-            <div key={expense.id}>
-                <ListItem primaryText={`${who} wydał(a): ${expense.cost} zł.`}
-                          secondaryText={
-                              <span
-                                  style={{color: payback < 0 ? '#F44336' : '#85bb65'}}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać: '}
-                                  <b>{abs}</b> zł</span>
-                          }
-                          rightIcon={<NavigationExpandMoreIcon onClick={(event) => this.actionMenu(event, expense)}/>}
-                          leftIcon={payback > 0 ? (
-                              <Satisfied/>
-                          ) : (
-                              <UnSatisfied/>
-                          )}/>
-            </div>
-        )
+            if (!svg) {
+                return;
+            }
+            
+            if (svg.contains(svg) && id) {
+                this.actionMenu(svg, id);
+            }
+        };
     }
 
     render() {
         return (
-            <div className='expanses-list'>
+            <div className='expenses-list'>
                 <List>
                     {this.props.expenses.expenseDetails.map(expense =>
-                        this.listItem(expense)
+                        <Expense key={expense.id} expense={expense} />
                     )}
                 </List>
                 <Popover
@@ -90,7 +77,7 @@ export class expensesList extends React.Component {
                     anchorEl={this.state.anchorEl}
                     anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                     targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                    onRequestClose={this.handleRequestClose}
+                    onRequestClose={() => this.setState({open: false})}
                 >
                     <Menu>
                         <MenuItem primaryText="Edytuj" onClick={() => this.showDetailsDialog()}/>
