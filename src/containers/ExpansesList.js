@@ -15,11 +15,12 @@ export class expensesList extends React.Component {
     constructor(props) {
         super(props);
         this.state = ({
-            open: false
+            open: false,
+            anchorEl: null
         })
     }
+
     showDetailsDialog() {
-        // console.log('edit', expense);
         this.setState({
             open: false
         });
@@ -27,7 +28,6 @@ export class expensesList extends React.Component {
     }
 
     deleteOnClick(expense) {
-        // console.log('usuwam', expense);
         this.setState({
             open: false
         });
@@ -37,7 +37,6 @@ export class expensesList extends React.Component {
     }
 
     actionMenu = (event, expense) => {
-        // console.log('actionMenu', expense);
         // This prevents ghost click.
         event.preventDefault();
 
@@ -64,30 +63,17 @@ export class expensesList extends React.Component {
             <div key={expense.id}>
                 <ListItem primaryText={`${who} wydał(a): ${expense.cost} zł.`}
                           secondaryText={
-                              <span style={{color: payback < 0 ? '#F44336' : '#85bb65' }}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać:' } <b>{abs}</b> zł</span>
+                              <span
+                                  style={{color: payback < 0 ? '#F44336' : '#85bb65'}}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać:'}
+                                  <b>{abs}</b> zł</span>
                           }
-                          rightIcon={<NavigationExpandMoreIcon onClick={(event) => this.actionMenu(event, expense)} />}
+                          rightIcon={<NavigationExpandMoreIcon onClick={(event) => this.actionMenu(event, expense)}/>}
                           leftIcon={payback > 0 ? (
                               <Satisfied/>
                           ) : (
                               <UnSatisfied/>
                           )}/>
-                <Popover
-                    open={this.state.open}
-                    anchorEl={this.state.anchorEl}
-                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                    onRequestClose={this.handleRequestClose}
-                >
-                    <Menu>
-                        <MenuItem primaryText="Edytuj" onClick={() => this.showDetailsDialog()} />
-                        <MenuItem primaryText="Usuń" onClick={() => this.deleteOnClick(this.props.selected)} />
-                        {/*<MenuItem primaryText="Kopiuj" />*/}
-                    </Menu>
-                </Popover>
             </div>
-
-
         )
     }
 
@@ -99,6 +85,18 @@ export class expensesList extends React.Component {
                         this.listItem(expense)
                     )}
                 </List>
+                <Popover
+                    open={this.state.open}
+                    anchorEl={this.state.anchorEl}
+                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                    onRequestClose={this.handleRequestClose}
+                >
+                    <Menu>
+                        <MenuItem primaryText="Edytuj" onClick={() => this.showDetailsDialog()}/>
+                        <MenuItem primaryText="Usuń" onClick={() => this.deleteOnClick(this.props.selected)}/>
+                    </Menu>
+                </Popover>
             </div>
         )
     }
