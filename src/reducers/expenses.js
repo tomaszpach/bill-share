@@ -19,7 +19,8 @@ const initialState = {
 let id = 0;
 
 const expenses = (state = initialState, action) => {
-    // console.log('state', state);
+    console.log('state', state);
+    console.log('action', action);
     switch (action.type) {
         case 'ADD_EXPENSE':
             return {
@@ -44,7 +45,7 @@ const expenses = (state = initialState, action) => {
                 })
             };
 
-        case 'SUMMARY':
+        case 'UPDATE_SUMMARY':
             let summaryCost = 0;
             state.expenseDetails.map(expense => {
                 return summaryCost += parseFloat(expense.cost)
@@ -81,21 +82,21 @@ const expenses = (state = initialState, action) => {
                     }
                 })
             };
+        case 'TOGGLE_DIALOG':
+            return {
+                ...state,
+                isEditDialogOpen: action.payload
+            };
         case 'SHOW_DETAILS':
             return {
                 ...state,
                 selected: state.expenseDetails.filter(expense => {
-                    if (expense.id === action.payload.id) {
+                    if (expense.id === action.payload) {
                         return expense
                     } else {
                         return null
                     }
                 })
-            };
-        case 'TOGGLE_DIALOG':
-            return {
-                ...state,
-                isEditDialogOpen: action.payload
             };
         default:
             return state
