@@ -17,7 +17,6 @@ const Expense = (props) => {
         value = abs,
         currency = '';
 
-
     if (payback === 0) {
         color = '#232dbb';
         text = null;
