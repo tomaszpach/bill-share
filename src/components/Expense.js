@@ -9,22 +9,41 @@ const Expense = (props) => {
     const id = props.expense.id,
         who = props.expense.who,
         cost = props.expense.cost,
-        payback = props.expense.payback,
+        payback = +props.expense.payback,
         abs = Math.abs(payback); // Change negative value
+
+    let color = '#F44336',
+        text = 'Musisz oddać: ',
+        value = abs,
+        currency = '';
+
+
+    if (payback === 0) {
+        color = '#232dbb';
+        text = null;
+        value = null;
+        currency = null;
+    } else if (payback > 0) {
+        color = '#85bb65';
+        text = 'Musisz odzyskać: ';
+        value = abs;
+        currency = 'zł';
+    }
+
+    const info = {
+        color: color,
+        text: text,
+        value: value,
+        currency: currency
+
+    };
 
     return (
         <ListItem primaryText={`${who} wydał(a): ${cost} zł.`}
-                  secondaryText={
-                      <span
-                          style={{color: payback < 0 ? '#F44336' : '#85bb65'}}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać: '}
-                          <b>{abs}</b> zł</span>
-                  }
+                  secondaryText={<span style={{color: info.color}}>{info.text}<b>{value}</b> {currency}</span>}
                   rightIcon={<NavigationExpandMoreIcon data-id={id}/>}
-                  leftIcon={payback < 0 ? (
-                      <UnSatisfied/>
-                  ) : (
-                      <Satisfied/>
-                  )}/>
+                  leftIcon={payback > 0 ? <Satisfied/> : <UnSatisfied/>}
+        />
     )
 };
 
