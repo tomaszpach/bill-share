@@ -64,7 +64,7 @@ export class expensesList extends React.Component {
                 <ListItem primaryText={`${who} wydał(a): ${expense.cost} zł.`}
                           secondaryText={
                               <span
-                                  style={{color: payback < 0 ? '#F44336' : '#85bb65'}}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać:'}
+                                  style={{color: payback < 0 ? '#F44336' : '#85bb65'}}>{payback < 0 ? 'Musisz oddać: ' : 'Musisz odzyskać: '}
                                   <b>{abs}</b> zł</span>
                           }
                           rightIcon={<NavigationExpandMoreIcon onClick={(event) => this.actionMenu(event, expense)}/>}
