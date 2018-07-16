@@ -1,4 +1,4 @@
-export const addExpense2 = payload => ({
+export const addExpense = payload => ({
     type: 'ADD_EXPENSE',
     payload
 });
@@ -9,7 +9,7 @@ export const removeExpense = payload => ({
 });
 
 export const summary = () => ({
-    type: 'SUMMARY'
+    type: 'UPDATE_SUMMARY'
 });
 
 export const updatePayback = () => ({
