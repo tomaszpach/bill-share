@@ -1,14 +1,14 @@
 $svgDimensions: 65;
 
 header {
-    h1, span {
-        color: #85bb65;
-    }
+  h1, span {
+    color: #85bb65;
+  }
 
-    svg {
-        width: $svgDimensions + px !important;
-        height: $svgDimensions + px !important;
-        float: left;
-        fill: #85bb65 !important;
-    }
+  svg {
+    height: $svgDimensions + px !important;
+    float: left;
+    fill: #85bb65 !important;
+    width: $svgDimensions + px !important;
+  }
 }

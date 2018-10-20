@@ -6,11 +6,8 @@ import UnSatisfied from 'material-ui/svg-icons/social/sentiment-very-dissatisfie
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 
 const Expense = (props) => {
-    const id = props.expense.id,
-        who = props.expense.who,
-        cost = props.expense.cost,
-        payback = +props.expense.payback,
-        abs = Math.abs(payback); // Change negative value
+    const { id, who, cost, payback } = props.expense;
+    const abs = Math.abs(payback); // Change negative value
 
     let color = '#F44336',
         text = 'Musisz oddać: ',
@@ -34,7 +31,6 @@ const Expense = (props) => {
         text: text,
         value: value,
         currency: currency
-
     };
 
     return (
